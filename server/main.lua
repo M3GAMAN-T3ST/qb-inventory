@@ -590,6 +590,7 @@ local function SaveStashItems(stashId, items)
 	})
 
 	Stashes[stashId].isOpen = false
+	TriggerEvent('keep-harmony:stash->close', stashId) -- keep-bags
 end
 
 ---Add items to a stash
@@ -2518,3 +2519,9 @@ CreateThread(function()
 end)
 
 --#endregion Threads
+
+exports('GetInventoryData', function(type, id) -- keep-bags
+	if type == 'stash' then
+		return Stashes[id]
+	end
+end)
